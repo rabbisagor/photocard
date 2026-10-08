@@ -3,648 +3,618 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="বাংলাদেশের জাতীয় দিবস ও উৎসব উপলক্ষে আধুনিক গ্লাস-মরফিজম ফটোকার্ড তৈরি করুন।" />
-  <title>বাংলা ফটোকার্ড | আধুনিক কার্ড মেকার</title>
+  <title>বাংলা ফটোকার্ড</title>
+  <!-- Bangla Fonts -->
   <link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --green: #00c853;
-      --green-deep: #006a4e;
-      --red: #ff1744;
-      --gold: #ffd700;
-      --bg: #050d0a;
-      --card: rgba(255,255,255,0.06);
-      --border: rgba(255,255,255,0.12);
-      --text: #f0fff4;
-      --muted: rgba(240,255,244,0.65);
+      --bg: #f4f6fb;
+      --surface: #ffffff;
+      --text: #1a1d26;
+      --muted: #6b7280;
+      --green: #006a4e;
+      --green-soft: #e6f5ef;
+      --red: #e11d48;
+      --red-soft: #fce7eb;
+      --gold: #b45309;
+      --gold-soft: #fef3c7;
+      --purple: #7c3aed;
+      --blue: #2563eb;
+      --border: rgba(0,0,0,0.06);
+      --shadow: 0 20px 50px rgba(0,0,0,0.08);
+      --radius: 24px;
     }
+
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'SolaimanLipi', system-ui, sans-serif;
+      font-family: 'SolaimanLipi', 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
       background: var(--bg);
       color: var(--text);
-      overflow-x: hidden;
       line-height: 1.6;
+      overflow-x: hidden;
     }
-    #particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-    .page { position: relative; z-index: 1; }
 
-    /* NAV */
+    /* ===== NAV ===== */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 0.9rem 1.5rem;
-      transition: background 0.3s, backdrop-filter 0.3s, border 0.3s;
-    }
-    .nav.scrolled {
-      background: rgba(5,13,10,0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      padding: 0.85rem 1.25rem;
+      background: rgba(244,246,251,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
     .nav-inner {
-      max-width: 1200px; margin: 0 auto;
+      max-width: 1100px; margin: 0 auto;
       display: flex; align-items: center; justify-content: space-between;
     }
     .logo {
       display: flex; align-items: center; gap: 0.5rem;
-      font-size: 1.2rem; font-weight: 700; color: var(--text); text-decoration: none;
+      font-size: 1.15rem; font-weight: 700; color: var(--text);
+      text-decoration: none;
     }
-    .logo-icon {
-      width: 36px; height: 36px; border-radius: 10px;
-      background: linear-gradient(135deg, var(--green-deep), var(--red));
-      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    .logo-mark {
+      width: 34px; height: 34px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--green), #00a86b);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: #fff;
     }
-    .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
-    .nav-links a {
-      color: var(--muted); text-decoration: none; font-size: 0.95rem;
-      transition: color 0.2s; position: relative;
+    .nav-cta {
+      background: var(--green); color: #fff;
+      padding: 0.5rem 1.15rem; border-radius: 12px;
+      font-size: 0.9rem; font-weight: 600; text-decoration: none;
+      font-family: inherit;
+      box-shadow: 0 4px 14px rgba(0,106,78,0.25);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .nav-links a:not(.nav-btn):hover { color: var(--gold); }
-    .nav-links a:not(.nav-btn)::after {
-      content: ''; position: absolute; bottom: -4px; left: 0;
-      width: 0; height: 2px; background: var(--gold); transition: width 0.25s;
-    }
-    .nav-links a:not(.nav-btn):hover::after { width: 100%; }
-    .nav-btn {
-      background: linear-gradient(135deg, var(--green-deep), #004d38);
-      color: #fff !important; padding: 0.5rem 1.2rem; border-radius: 10px;
-      font-weight: 600; box-shadow: 0 4px 15px rgba(0,106,78,0.35);
-      transition: transform 0.2s, box-shadow 0.2s !important;
-    }
-    .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,106,78,0.5); }
-    .hamburger {
-      display: none; flex-direction: column; gap: 5px;
-      background: none; border: none; cursor: pointer; padding: 4px;
-    }
-    .hamburger span {
-      display: block; width: 24px; height: 2.5px;
-      background: var(--text); border-radius: 2px; transition: 0.3s;
-    }
-    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .hamburger.active span:nth-child(2) { opacity: 0; }
-    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,106,78,0.35); }
 
-    /* HERO */
+    /* ===== HERO SLIDER ===== */
     .hero {
-      min-height: 100vh; display: flex; align-items: center;
-      padding: 6rem 1.5rem 4rem; position: relative; overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 15% 40%, rgba(255,23,68,0.2) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 60% at 85% 30%, rgba(0,200,83,0.18) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 40% at 50% 90%, rgba(255,215,0,0.12) 0%, transparent 50%),
-        radial-gradient(ellipse 30% 30% at 70% 70%, rgba(100,60,255,0.1) 0%, transparent 50%);
-      animation: heroBg 10s ease-in-out infinite alternate;
-    }
-    @keyframes heroBg {
-      0% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0.85; transform: scale(1.05); }
-    }
-    .hero-content {
-      max-width: 1200px; margin: 0 auto; width: 100%;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
-      align-items: center; position: relative; z-index: 2;
-    }
-    .hero-left { opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s 0.2s forwards; }
-    .hero-right { opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s 0.45s forwards; }
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: rgba(255,23,68,0.12); border: 1px solid rgba(255,23,68,0.3);
-      color: #ff8a9a; font-size: 0.85rem; padding: 0.4rem 1rem;
-      border-radius: 50px; margin-bottom: 1.4rem;
-      animation: pulse-border 2s ease-in-out infinite;
-    }
-    @keyframes pulse-border {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(255,23,68,0.3); }
-      50% { box-shadow: 0 0 0 6px rgba(255,23,68,0); }
-    }
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2;
-      margin-bottom: 1.2rem; font-weight: 700;
-    }
-    .hero h1 .gradient {
-      background: linear-gradient(90deg, #fff, var(--gold), var(--green), var(--red), #fff);
-      background-size: 300% auto;
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; animation: gradientMove 4s linear infinite;
-    }
-    @keyframes gradientMove { to { background-position: 300% center; } }
-    .hero-desc {
-      color: var(--muted); font-size: 1.1rem; max-width: 460px; margin-bottom: 2rem;
-    }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; }
-
-    .btn {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.85rem 1.6rem; border-radius: 14px;
-      font-family: inherit; font-size: 1rem; font-weight: 600;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: all 0.25s; position: relative; overflow: hidden;
-    }
-    .btn-main {
-      background: linear-gradient(135deg, var(--green-deep), #003d2e);
-      color: #fff; box-shadow: 0 8px 25px rgba(0,106,78,0.4);
-    }
-    .btn-main:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(0,106,78,0.55); }
-    .btn-main::before {
-      content: ''; position: absolute; top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-      transition: left 0.5s;
-    }
-    .btn-main:hover::before { left: 100%; }
-    .btn-ghost {
-      background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: var(--text);
-    }
-    .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); transform: translateY(-2px); }
-
-    .hero-stats { display: flex; gap: 2rem; }
-    .stat-num { font-size: 1.6rem; font-weight: 700; color: var(--gold); display: block; }
-    .stat-label { font-size: 0.85rem; color: var(--muted); }
-
-    /* Card showcase */
-    .card-showcase {
-      position: relative; display: flex; justify-content: center; align-items: center; height: 420px;
-    }
-    .showcase-glow {
-      position: absolute; width: 300px; height: 300px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,23,68,0.3), rgba(0,200,83,0.15), transparent 70%);
-      filter: blur(40px); animation: glowBreath 4s ease-in-out infinite alternate;
-    }
-    @keyframes glowBreath {
-      from { transform: scale(0.85); opacity: 0.6; }
-      to { transform: scale(1.2); opacity: 1; }
-    }
-    .showcase-card {
-      width: 250px; aspect-ratio: 3/4.15; border-radius: 24px;
-      background: linear-gradient(165deg, #004d38 0%, #006a4e 30%, #0a2e24 65%, #1a0a2e 100%);
-      border: 1px solid rgba(255,255,255,0.18);
-      box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0,106,78,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
-      padding: 1.4rem 1.15rem; display: flex; flex-direction: column;
-      align-items: center; text-align: center; position: relative; z-index: 2;
-      animation: cardBob 5s ease-in-out infinite; cursor: pointer; transition: transform 0.3s;
-    }
-    .showcase-card:hover { transform: scale(1.04) rotate(0deg) !important; }
-    @keyframes cardBob {
-      0%, 100% { transform: rotate(3deg) translateY(0); }
-      50% { transform: rotate(1.5deg) translateY(-14px); }
-    }
-    .sc-stripe {
-      position: absolute; top: 0; left: 0; right: 0; height: 6px;
-      background: linear-gradient(90deg, var(--green-deep), var(--gold), var(--red));
-      border-radius: 24px 24px 0 0;
-    }
-    .sc-badge {
-      background: linear-gradient(90deg, var(--red), #ff5252);
-      font-size: 0.68rem; padding: 0.25rem 0.8rem; border-radius: 20px;
-      margin-bottom: 0.5rem; box-shadow: 0 3px 12px rgba(255,23,68,0.4);
-    }
-    .sc-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.15rem; }
-    .sc-sub { font-size: 0.78rem; color: var(--gold); margin-bottom: 1rem; }
-    .sc-photo {
-      width: 100px; height: 100px; border-radius: 50%; padding: 3px;
-      background: linear-gradient(135deg, var(--gold), var(--red), var(--green));
-      margin-bottom: 1rem; animation: ringRotate 6s linear infinite;
-    }
-    @keyframes ringRotate { to { filter: hue-rotate(360deg); } }
-    .sc-photo-inner {
-      width: 100%; height: 100%; border-radius: 50%;
-      background: rgba(0,0,0,0.45); display: flex; align-items: center;
-      justify-content: center; font-size: 2.3rem;
-    }
-    .sc-glass {
-      background: rgba(255,255,255,0.1); backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.15); border-radius: 14px;
-      padding: 0.85rem; width: 100%; margin-top: auto;
-    }
-    .sc-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.15rem; }
-    .sc-msg { font-size: 0.75rem; opacity: 0.85; line-height: 1.4; }
-
-    .chip {
-      position: absolute; background: rgba(10,30,20,0.8); backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.15); border-radius: 12px;
-      padding: 0.5rem 0.9rem; font-size: 0.8rem; z-index: 3;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-      animation: chipFloat 4s ease-in-out infinite; white-space: nowrap;
-    }
-    .chip-1 { top: 8%; left: -5%; animation-delay: 0s; }
-    .chip-2 { bottom: 12%; right: -8%; animation-delay: 0.8s; }
-    .chip-3 { top: 48%; left: -15%; animation-delay: 1.5s; }
-    @keyframes chipFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+      padding: 5.5rem 1.25rem 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
-    /* SECTIONS */
-    .section { max-width: 1200px; margin: 0 auto; padding: 5rem 1.5rem; }
-    .section-head { text-align: center; margin-bottom: 3rem; }
-    .section-head h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin-bottom: 0.6rem; }
-    .section-head p { color: var(--muted); max-width: 500px; margin: 0 auto; font-size: 1.05rem; }
+    .slider {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      max-height: 420px;
+      box-shadow: var(--shadow);
+      background: #1a1a2e;
+    }
 
-    .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .slides {
+      display: flex;
+      height: 100%;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    /* Abstract 3D-like rings (CSS) */
+    .slide-rings {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 40px solid;
+      opacity: 0.35;
+      filter: blur(1px);
+    }
+    .ring-1 { width: 320px; height: 320px; border-color: rgba(168,85,247,0.5); top: -80px; right: -60px; transform: rotate(25deg); }
+    .ring-2 { width: 280px; height: 280px; border-color: rgba(59,130,246,0.4); bottom: -70px; left: -50px; transform: rotate(-20deg); }
+    .ring-3 { width: 200px; height: 200px; border-color: rgba(236,72,153,0.35); top: 40%; left: 55%; transform: rotate(40deg); }
+
+    /* Glass card inside slide */
+    .glass-banner {
+      position: relative;
+      z-index: 2;
+      width: min(420px, 90%);
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 22px;
+      padding: 2rem 1.75rem;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+      animation: glassIn 0.7s ease;
+    }
+    @keyframes glassIn {
+      from { opacity: 0; transform: scale(0.95) translateY(12px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .glass-banner .flag { font-size: 2rem; margin-bottom: 0.6rem; }
+    .glass-banner h2 {
+      font-family: 'SolaimanLipi', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+    .glass-banner .sub {
+      font-family: 'Hind Siliguri', sans-serif;
+      font-size: clamp(0.9rem, 2.2vw, 1.05rem);
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 1.2rem;
+    }
+    .glass-banner .btn-slide {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #fff;
+      color: var(--text);
+      padding: 0.65rem 1.4rem;
+      border-radius: 12px;
+      font-family: 'SolaimanLipi', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+    .glass-banner .btn-slide:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    /* Slide color themes */
+    .slide-1 { background: linear-gradient(145deg, #1a0a2e 0%, #4a1a6b 40%, #1e3a5f 100%); }
+    .slide-2 { background: linear-gradient(145deg, #0a2f1f 0%, #006a4e 45%, #0d3b5c 100%); }
+    .slide-3 { background: linear-gradient(145deg, #1a1025 0%, #7c2d12 40%, #4c1d95 100%); }
+    .slide-4 { background: linear-gradient(145deg, #0c1445 0%, #1e3a8a 40%, #0e7490 100%); }
+
+    /* Slider controls */
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.1rem;
+    }
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #c5c9d4;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      padding: 0;
+    }
+    .dot.active {
+      width: 24px;
+      border-radius: 4px;
+      background: var(--green);
+    }
+
+    .slider-arrows {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 0.75rem;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .arrow {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      color: var(--text);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      pointer-events: auto;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .arrow:hover { transform: scale(1.08); background: #fff; }
+
+    /* ===== CATEGORIES ===== */
+    .categories {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 4rem;
+    }
+    .cat-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
     .cat-card {
-      position: relative; border-radius: 18px; overflow: hidden; min-height: 200px;
-      text-decoration: none; color: var(--text); border: 1px solid var(--border);
-      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      background-size: cover; background-position: center; cursor: pointer;
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      min-height: 170px;
+      text-decoration: none;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid rgba(255,255,255,0.5);
     }
     .cat-card::before {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(180deg, transparent 20%, rgba(0,0,0,0.85) 100%);
-      z-index: 1; transition: background 0.3s;
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 25%, rgba(0,0,0,0.7) 100%);
+      z-index: 1;
+      transition: background 0.3s;
     }
     .cat-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      border-color: rgba(255,215,0,0.4);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.14);
     }
     .cat-card:hover::before {
-      background: linear-gradient(180deg, transparent 10%, rgba(0,0,0,0.9) 100%);
+      background: linear-gradient(180deg, transparent 15%, rgba(0,0,0,0.78) 100%);
     }
-    .cat-body { position: relative; z-index: 2; padding: 1.3rem 1.15rem; }
-    .cat-icon { font-size: 1.8rem; margin-bottom: 0.3rem; }
-    .cat-body h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; }
+
+    .cat-body {
+      position: relative;
+      z-index: 2;
+      padding: 1.1rem 1rem;
+    }
+    .cat-icon { font-size: 1.6rem; margin-bottom: 0.2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+    .cat-body h3 {
+      font-family: 'SolaimanLipi', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.15rem;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
     .cat-body p {
-      font-size: 0.82rem; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem;
-      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      font-family: 'Hind Siliguri', sans-serif;
+      font-size: 0.78rem;
+      opacity: 0.9;
+      margin-bottom: 0.4rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
-    .cat-tag {
-      display: inline-block; font-size: 0.72rem; font-weight: 600;
-      padding: 0.2rem 0.6rem; border-radius: 8px;
+    .cat-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 0.18rem 0.55rem;
+      border-radius: 8px;
+      font-family: 'Hind Siliguri', sans-serif;
     }
-    .tag-live { background: rgba(0,200,83,0.2); color: #69f0ae; border: 1px solid rgba(0,200,83,0.3); }
-    .tag-soon { background: rgba(255,215,0,0.12); color: #ffd54f; border: 1px solid rgba(255,215,0,0.25); }
+    .badge-live {
+      background: rgba(0,200,83,0.25);
+      color: #bbf7d0;
+      border: 1px solid rgba(0,200,83,0.35);
+    }
+    .badge-soon {
+      background: rgba(255,255,255,0.15);
+      color: #fde68a;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
     .cat-new {
-      position: absolute; top: 12px; right: 12px; z-index: 3;
-      background: var(--red); color: #fff; font-size: 0.7rem; font-weight: 700;
-      padding: 0.2rem 0.6rem; border-radius: 8px;
-      animation: newPulse 2s ease-in-out infinite;
-    }
-    @keyframes newPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(255,23,68,0.5); }
-      50% { box-shadow: 0 0 0 6px rgba(255,23,68,0); }
+      position: absolute;
+      top: 10px; right: 10px;
+      z-index: 3;
+      background: var(--red);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 8px;
+      font-family: 'Hind Siliguri', sans-serif;
     }
 
-    .bg-victory { background-image: linear-gradient(160deg,rgba(0,80,50,0.4),rgba(5,20,15,0.6)), url('https://images.unsplash.com/photo-1564507592333-c60657eea523?w=700&q=80'); background-color: #0a3d2e; }
-    .bg-freedom { background-image: linear-gradient(160deg,rgba(0,100,70,0.35),rgba(0,30,20,0.6)), url('https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=700&q=80'); background-color: #006a4e; }
-    .bg-ekushey { background-image: linear-gradient(160deg,rgba(20,20,40,0.4),rgba(5,5,15,0.65)), url('https://images.unsplash.com/photo-1548013146-72479768bada?w=700&q=80'); background-color: #1a1a2e; }
-    .bg-boishakh { background-image: linear-gradient(160deg,rgba(232,93,4,0.4),rgba(100,30,0,0.6)), url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=700&q=80'); background-color: #e85d04; }
-    .bg-eid { background-image: linear-gradient(160deg,rgba(13,90,99,0.4),rgba(5,30,40,0.65)), url('https://images.unsplash.com/photo-1564769625905-50e93615e769?w=700&q=80'); background-color: #0d5c63; }
-    .bg-eid2 { background-image: linear-gradient(160deg,rgba(26,70,40,0.4),rgba(10,30,20,0.65)), url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=700&q=80'); background-color: #1a472a; }
-    .bg-bday { background-image: linear-gradient(160deg,rgba(155,34,38,0.35),rgba(50,10,20,0.6)), url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=700&q=80'); background-color: #9b2226; }
-    .bg-wedding { background-image: linear-gradient(160deg,rgba(106,76,147,0.35),rgba(40,20,60,0.6)), url('https://images.unsplash.com/photo-1519741497674-611481863552?w=700&q=80'); background-color: #6a4c93; }
-    .bg-exam { background-image: linear-gradient(160deg,rgba(29,53,87,0.35),rgba(10,20,40,0.6)), url('https://images.unsplash.com/photo-1456513080880-7d93ddd05f0a?w=700&q=80'); background-color: #1d3557; }
+    /* Soft colorful backgrounds */
+    .bg-1 { background-image: linear-gradient(160deg, rgba(0,80,50,0.45), rgba(0,30,20,0.55)), url('https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600&q=80'); background-color: #0a3d2e; }
+    .bg-2 { background-image: linear-gradient(160deg, rgba(0,100,70,0.4), rgba(0,40,30,0.55)), url('https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=600&q=80'); background-color: #006a4e; }
+    .bg-3 { background-image: linear-gradient(160deg, rgba(30,30,60,0.45), rgba(15,15,30,0.6)), url('https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80'); background-color: #1a1a2e; }
+    .bg-4 { background-image: linear-gradient(160deg, rgba(232,93,4,0.4), rgba(120,40,0,0.5)), url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80'); background-color: #e85d04; }
+    .bg-5 { background-image: linear-gradient(160deg, rgba(13,90,99,0.4), rgba(5,40,50,0.55)), url('https://images.unsplash.com/photo-1564769625905-50e93615e769?w=600&q=80'); background-color: #0d5c63; }
+    .bg-6 { background-image: linear-gradient(160deg, rgba(26,80,50,0.4), rgba(10,40,25,0.55)), url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=600&q=80'); background-color: #1a472a; }
+    .bg-7 { background-image: linear-gradient(160deg, rgba(180,40,50,0.4), rgba(80,15,25,0.55)), url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=80'); background-color: #9b2226; }
+    .bg-8 { background-image: linear-gradient(160deg, rgba(100,60,150,0.4), rgba(40,20,70,0.55)), url('https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80'); background-color: #6a4c93; }
+    .bg-9 { background-image: linear-gradient(160deg, rgba(30,50,90,0.4), rgba(15,25,50,0.55)), url('https://images.unsplash.com/photo-1456513080880-7d93ddd05f0a?w=600&q=80'); background-color: #1d3557; }
 
-    .features { background: linear-gradient(180deg, transparent, rgba(0,106,78,0.06), transparent); }
-    .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; }
-    .feat {
-      background: var(--card); border: 1px solid var(--border); border-radius: 18px;
-      padding: 1.8rem 1.4rem; text-align: center;
-      transition: transform 0.3s, border-color 0.3s;
-      opacity: 0; transform: translateY(20px);
-    }
-    .feat.visible { opacity: 1; transform: translateY(0); transition: opacity 0.5s, transform 0.5s; }
-    .feat:hover { transform: translateY(-5px); border-color: rgba(255,215,0,0.3); }
-    .feat-icon {
-      width: 56px; height: 56px; border-radius: 16px;
-      background: linear-gradient(135deg, rgba(0,106,78,0.3), rgba(255,215,0,0.15));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; margin: 0 auto 1rem;
-    }
-    .feat h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
-    .feat p { font-size: 0.9rem; color: var(--muted); }
-
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-    .step { text-align: center; opacity: 0; transform: translateY(20px); }
-    .step.visible { opacity: 1; transform: translateY(0); transition: opacity 0.5s, transform 0.5s; }
-    .step-circle {
-      width: 60px; height: 60px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--green-deep), #003d2e);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; font-weight: 700; margin: 0 auto 1.2rem;
-      box-shadow: 0 6px 20px rgba(0,106,78,0.4);
-    }
-    .step h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
-    .step p { font-size: 0.9rem; color: var(--muted); }
-
-    .cta-box { max-width: 1200px; margin: 0 auto 5rem; padding: 0 1.5rem; }
-    .cta-inner {
-      background: linear-gradient(135deg, rgba(0,106,78,0.3), rgba(255,23,68,0.15), rgba(255,215,0,0.08));
-      border: 1px solid var(--border); border-radius: 28px;
-      padding: 3.5rem 2rem; text-align: center; position: relative; overflow: hidden;
-    }
-    .cta-inner::before {
-      content: ''; position: absolute; top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background: conic-gradient(from 0deg, transparent, rgba(0,200,83,0.08), transparent 30%);
-      animation: ctaSpin 8s linear infinite;
-    }
-    @keyframes ctaSpin { to { transform: rotate(360deg); } }
-    .cta-inner > * { position: relative; z-index: 1; }
-    .cta-inner h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin-bottom: 0.7rem; }
-    .cta-inner p { color: var(--muted); margin-bottom: 1.6rem; font-size: 1.05rem; }
-
-    footer { border-top: 1px solid var(--border); padding: 2.5rem 1.5rem; text-align: center; }
-    .footer-logo { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
-    footer p { color: var(--muted); font-size: 0.9rem; }
-    footer a { color: var(--gold); text-decoration: none; }
-
+    /* Toast */
     .toast {
-      position: fixed; bottom: 2rem; left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: rgba(10,30,20,0.95); backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,215,0,0.3); color: var(--text);
-      padding: 0.9rem 1.5rem; border-radius: 14px; font-size: 0.95rem;
-      z-index: 200; transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4); white-space: nowrap;
+      position: fixed; bottom: 1.5rem; left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: #1a1d26; color: #fff;
+      padding: 0.85rem 1.4rem; border-radius: 14px;
+      font-size: 0.9rem; z-index: 200;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      white-space: nowrap;
+      font-family: 'Hind Siliguri', sans-serif;
     }
     .toast.show { transform: translateX(-50%) translateY(0); }
 
-    /* RESPONSIVE */
-    @media (max-width: 900px) {
-      .hero-content { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
-      .hero-desc { margin-left: auto; margin-right: auto; }
-      .hero-actions { justify-content: center; }
-      .hero-stats { justify-content: center; }
-      .hero-right { order: -1; }
-      .card-showcase { height: 380px; }
-      .showcase-card { width: 220px; }
-      .chip { font-size: 0.72rem; padding: 0.4rem 0.7rem; }
-      .chip-1 { left: 0; top: 5%; }
-      .chip-2 { right: 0; }
-      .chip-3 { left: 0; }
-      .feat-grid, .steps { grid-template-columns: 1fr 1fr; }
-      .nav-links { display: none; }
-      .nav-links.open {
-        display: flex; flex-direction: column;
-        position: absolute; top: 100%; left: 0; right: 0;
-        background: rgba(5,13,10,0.97); backdrop-filter: blur(20px);
-        padding: 1.2rem 1.5rem 1.5rem; gap: 1rem;
-        border-bottom: 1px solid var(--border);
-      }
-      .hamburger { display: flex; }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      font-family: 'Hind Siliguri', sans-serif;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .slider { aspect-ratio: 4/3; max-height: 360px; border-radius: 20px; }
+      .glass-banner { padding: 1.5rem 1.25rem; }
+      .ring { border-width: 28px; }
+      .ring-1 { width: 220px; height: 220px; }
+      .ring-2 { width: 180px; height: 180px; }
+      .arrow { width: 34px; height: 34px; font-size: 0.95rem; }
     }
     @media (max-width: 600px) {
       .cat-grid { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
-      .cat-card { min-height: 150px; border-radius: 12px; }
-      .cat-body { padding: 0.8rem 0.5rem; }
+      .cat-card { min-height: 140px; border-radius: 14px; }
+      .cat-body { padding: 0.75rem 0.5rem; }
       .cat-body h3 { font-size: 0.82rem; }
       .cat-body p { display: none; }
-      .cat-icon { font-size: 1.4rem; }
-      .cat-tag { font-size: 0.6rem; padding: 0.15rem 0.4rem; }
-      .cat-new { font-size: 0.58rem; top: 6px; right: 6px; padding: 0.15rem 0.4rem; }
-      .feat-grid, .steps { grid-template-columns: 1fr; }
-      .hero-stats { gap: 1.2rem; }
-      .stat-num { font-size: 1.3rem; }
-      .showcase-card { width: 200px; }
-      .card-showcase { height: 340px; }
-      .btn { width: 100%; justify-content: center; }
-      .hero-actions { flex-direction: column; }
+      .cat-icon { font-size: 1.3rem; }
+      .cat-badge { font-size: 0.58rem; padding: 0.12rem 0.35rem; }
+      .cat-new { font-size: 0.55rem; top: 6px; right: 6px; }
+      .hero { padding-top: 4.8rem; }
+      .slider { aspect-ratio: 3/3.2; max-height: 340px; }
     }
   </style>
 </head>
 <body>
-  <canvas id="particles"></canvas>
-  <div class="page">
-    <nav class="nav" id="nav">
-      <div class="nav-inner">
-        <a href="#" class="logo"><div class="logo-icon">🇧🇩</div> বাংলা ফটোকার্ড</a>
-        <button class="hamburger" id="hamburger" aria-label="মেনু"><span></span><span></span><span></span></button>
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#categories">ক্যাটাগরি</a></li>
-          <li><a href="#features">ফিচার</a></li>
-          <li><a href="#howto">কীভাবে</a></li>
-          <li><a href="cards/victory-day.html" class="nav-btn">কার্ড বানান →</a></li>
-        </ul>
-      </div>
-    </nav>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo"><div class="logo-mark">🇧🇩</div> বাংলা ফটোকার্ড</a>
+      <a href="cards/victory-day.html" class="nav-cta">কার্ড বানান</a>
+    </div>
+  </nav>
 
-    <section class="hero">
-      <div class="hero-bg"></div>
-      <div class="hero-content">
-        <div class="hero-left">
-          <div class="hero-tag">✨ গ্লাস মরফিজম · ২০২৬ সংস্করণ</div>
-          <h1>আপনার মুহূর্তকে<br><span class="gradient">স্মরণীয় কার্ডে</span><br>রূপ দিন</h1>
-          <p class="hero-desc">বিজয় দিবস থেকে ঈদ, জন্মদিন থেকে একুশে — সব উপলক্ষের জন্য আধুনিক গ্লাস-মরফিজম ফটোকার্ড তৈরি করুন। ছবি, নাম, বার্তা কাস্টমাইজ করে PNG, JPG বা PDF ডাউনলোড করুন।</p>
-          <div class="hero-actions">
-            <a href="cards/victory-day.html" class="btn btn-main">🇧🇩 বিজয় দিবস কার্ড →</a>
-            <a href="#categories" class="btn btn-ghost">সব ক্যাটাগরি</a>
+  <!-- HERO SLIDER -->
+  <section class="hero">
+    <div class="slider" id="slider">
+      <div class="slides" id="slides">
+        <!-- Slide 1: Victory Day -->
+        <div class="slide slide-1">
+          <div class="slide-rings">
+            <div class="ring ring-1"></div>
+            <div class="ring ring-2"></div>
+            <div class="ring ring-3"></div>
           </div>
-          <div class="hero-stats">
-            <div class="stat"><span class="stat-num" data-count="9">0</span><span class="stat-label">ক্যাটাগরি</span></div>
-            <div class="stat"><span class="stat-num" data-count="3">0</span><span class="stat-label">ফরম্যাট</span></div>
-            <div class="stat"><span class="stat-num" data-count="100">0</span><span class="stat-label">% ফ্রি</span></div>
+          <div class="glass-banner">
+            <div class="flag">🇧🇩</div>
+            <h2>বিজয় দিবস ২০২৬</h2>
+            <p class="sub">মহান বিজয়ের ৫৫ বছর · জয় বাংলা</p>
+            <a href="cards/victory-day.html" class="btn-slide">কার্ড তৈরি করুন →</a>
           </div>
         </div>
-        <div class="hero-right">
-          <div class="card-showcase">
-            <div class="showcase-glow"></div>
-            <div class="chip chip-1">📥 PNG · JPG · PDF</div>
-            <div class="chip chip-3">🎨 গ্লাস মরফিজম</div>
-            <div class="showcase-card" id="heroCard" onclick="location.href='cards/victory-day.html'">
-              <div class="sc-stripe"></div>
-              <div class="sc-badge">১৬ ডিসেম্বর</div>
-              <div class="sc-title">বিজয় দিবস ২০২৬</div>
-              <div class="sc-sub">মহান বিজয়ের ৫৫ বছর</div>
-              <div class="sc-photo"><div class="sc-photo-inner">🇧🇩</div></div>
-              <div class="sc-glass">
-                <div class="sc-name">আপনার নাম</div>
-                <div class="sc-msg">জয় বাংলা! মহান মুক্তিযুদ্ধের চেতনায়...</div>
-              </div>
-            </div>
-            <div class="chip chip-2">✏️ পুরোপুরি কাস্টমাইজ</div>
+        <!-- Slide 2: Independence -->
+        <div class="slide slide-2">
+          <div class="slide-rings">
+            <div class="ring ring-1" style="border-color:rgba(0,200,120,0.45)"></div>
+            <div class="ring ring-2" style="border-color:rgba(255,200,50,0.35)"></div>
+            <div class="ring ring-3" style="border-color:rgba(0,150,200,0.3)"></div>
+          </div>
+          <div class="glass-banner">
+            <div class="flag">🟢</div>
+            <h2>স্বাধীনতা দিবস</h2>
+            <p class="sub">২৬ মার্চ · স্বাধীনতার অমর স্মৃতি</p>
+            <a href="#categories" class="btn-slide">ক্যাটাগরি দেখুন →</a>
+          </div>
+        </div>
+        <!-- Slide 3: Ekushey -->
+        <div class="slide slide-3">
+          <div class="slide-rings">
+            <div class="ring ring-1" style="border-color:rgba(255,100,100,0.4)"></div>
+            <div class="ring ring-2" style="border-color:rgba(180,100,255,0.35)"></div>
+            <div class="ring ring-3" style="border-color:rgba(255,180,50,0.3)"></div>
+          </div>
+          <div class="glass-banner">
+            <div class="flag">🖤</div>
+            <h2>একুশে ফেব্রুয়ারি</h2>
+            <p class="sub">আন্তর্জাতিক মাতৃভাষা দিবস · শ্রদ্ধা</p>
+            <a href="#categories" class="btn-slide">ক্যাটাগরি দেখুন →</a>
+          </div>
+        </div>
+        <!-- Slide 4: General -->
+        <div class="slide slide-4">
+          <div class="slide-rings">
+            <div class="ring ring-1" style="border-color:rgba(100,180,255,0.45)"></div>
+            <div class="ring ring-2" style="border-color:rgba(100,255,200,0.3)"></div>
+            <div class="ring ring-3" style="border-color:rgba(200,150,255,0.35)"></div>
+          </div>
+          <div class="glass-banner">
+            <div class="flag">✨</div>
+            <h2>আপনার মুহূর্তকে<br>স্মরণীয় করুন</h2>
+            <p class="sub">গ্লাস মরফিজম ফটোকার্ড · ফ্রি</p>
+            <a href="cards/victory-day.html" class="btn-slide">এখনই শুরু করুন →</a>
           </div>
         </div>
       </div>
-    </section>
 
-    <section class="section" id="categories">
-      <div class="section-head">
-        <h2>📸 ক্যাটাগরি বেছে নিন</h2>
-        <p>আপনার উপলক্ষ অনুযায়ী সুন্দর ফটোকার্ড তৈরি করুন</p>
-      </div>
-      <div class="cat-grid">
-        <a href="cards/victory-day.html" class="cat-card bg-victory">
-          <span class="cat-new">নতুন</span>
-          <div class="cat-body">
-            <div class="cat-icon">🇧🇩</div>
-            <h3>বিজয় দিবস</h3>
-            <p>১৬ ডিসেম্বর — সাভার স্মৃতিসৌধের ছায়ায় মহান বিজয়</p>
-            <span class="cat-tag tag-live">● এখনই ব্যবহার করুন</span>
-          </div>
-        </a>
-        <a href="#" class="cat-card bg-freedom" data-soon>
-          <div class="cat-body"><div class="cat-icon">🟢</div><h3>স্বাধীনতা দিবস</h3><p>২৬ মার্চ — স্বাধীনতার অমর স্মৃতি</p><span class="cat-tag tag-soon">⏳ শীঘ্রই আসছে</span></div>
-        </a>
-        <a href="#" class="cat-card bg-ekushey" data-soon>
-          <div class="cat-body"><div class="cat-icon">🖤</div><h3>একুশে ফেব্রুয়ারি</h3><p>মাতৃভাষা দিবস — শহীদ মিনারে শ্রদ্ধা</p><span class="cat-tag tag-soon">⏳ শীঘ্রই আসছে</span></div>
-        </a>
-        <a href="#" class="cat-card bg-boishakh" data-soon>
-          <div class="cat-body"><div class="cat-icon">🌸</div><h3>পহেলা বৈশাখ</h3><p>বাংলা নববর্ষ — রঙিন শুভেচ্ছা</p><span class="cat-tag tag-soon">⏳ শীঘ্রই আসছে</span></div>
-        </a>
-        <a href="#" class="cat-card bg-eid" data-soon>
-          <div class="cat-body"><div class="cat-icon">🌙</div><h3>ঈদুল ফিতর</h3><p>ঈদের আনন্দ ভাগাভাগি করুন</p><span class="cat-tag tag-soon">⏳ শীঘ্রই আসছে</span></div>
-        </a>
-        <a href="#" class="cat-card bg-eid2" data-soon>
-          <div class="cat-body"><div class="cat-icon">🕋</div><h3>ঈদুল আজহা</h3><p>কুরবানির ঈদের শুভেচ্ছা</p><span class="cat-tag tag-soon">⏳ শীঘ্রই আসছে</span></div>
-        </a>
-        <a href="#" class="cat-card bg-bday" data-soon>
-          <div class="cat-body"><div class="cat-icon">🎂</div><h3>জন্মদিন</h3><p>বিশেষ কারো জন্মদিনে শুভেচ্ছা</p><span class="cat-tag tag-soon">⏳ শীঘ্রই আসছে</span></div>
-        </a>
-        <a href="#" class="cat-card bg-wedding" data-soon>
-          <div class="cat-body"><div class="cat-icon">💍</div><h3>বিবাহ বার্ষিকী</h3><p>প্রেমের দিনটি স্মরণীয় করুন</p><span class="cat-tag tag-soon">⏳ শীঘ্রই আসছে</span></div>
-        </a>
-        <a href="#" class="cat-card bg-exam" data-soon>
-          <div class="cat-body"><div class="cat-icon">🎓</div><h3>পরীক্ষার শুভেচ্ছা</h3><p>অনুপ্রেরণামূলক শুভেচ্ছা কার্ড</p><span class="cat-tag tag-soon">⏳ শীঘ্রই আসছে</span></div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section features" id="features">
-      <div class="section-head"><h2>✨ কেন এই কার্ড মেকার?</h2><p>সহজ, সুন্দর, সম্পূর্ণ ফ্রি</p></div>
-      <div class="feat-grid">
-        <div class="feat"><div class="feat-icon">🖼️</div><h3>ছবি আপলোড</h3><p>নিজের ছবি দিয়ে কার্ডকে একদম ব্যক্তিগতকৃত করুন</p></div>
-        <div class="feat"><div class="feat-icon">✏️</div><h3>লাইভ এডিট</h3><p>নাম, বার্তা, শিরোনাম — টাইপ করতেই প্রিভিউ আপডেট</p></div>
-        <div class="feat"><div class="feat-icon">💎</div><h3>গ্লাস মরফিজম</h3><p>আধুনিক frosted-glass ডিজাইন যা সবার নজর কাড়ে</p></div>
-        <div class="feat"><div class="feat-icon">📥</div><h3>৩ ফরম্যাট</h3><p>PNG, JPG ও PDF — হাই-রেজোলিউশনে ডাউনলোড</p></div>
-        <div class="feat"><div class="feat-icon">📱</div><h3>মোবাইল ফ্রেন্ডলি</h3><p>ফোন, ট্যাবলেট, পিসি — সব ডিভাইসে পারফেক্ট</p></div>
-        <div class="feat"><div class="feat-icon">🔒</div><h3>কোনো সাইনআপ নেই</h3><p>সরাসরি ব্যবহার করুন — অ্যাকাউন্ট লাগবে না</p></div>
-      </div>
-    </section>
-
-    <section class="section" id="howto">
-      <div class="section-head"><h2>🛠️ মাত্র ৩ ধাপে রেডি</h2><p>কয়েক সেকেন্ডে আপনার কার্ড তৈরি</p></div>
-      <div class="steps">
-        <div class="step"><div class="step-circle">১</div><h3>ক্যাটাগরি বেছে নিন</h3><p>বিজয় দিবস বা আপনার পছন্দের উপলক্ষ সিলেক্ট করুন</p></div>
-        <div class="step"><div class="step-circle">২</div><h3>কাস্টমাইজ করুন</h3><p>ছবি আপলোড করুন, নাম ও শুভেচ্ছা বার্তা লিখুন</p></div>
-        <div class="step"><div class="step-circle">৩</div><h3>ডাউনলোড করুন</h3><p>PNG, JPG বা PDF ফরম্যাটে কার্ড সেভ করুন</p></div>
-      </div>
-    </section>
-
-    <div class="cta-box">
-      <div class="cta-inner">
-        <h2>🇧🇩 বিজয় দিবস ২০২৬ উপলক্ষে কার্ড বানান</h2>
-        <p>এখনই শুরু করুন — মাত্র কয়েক সেকেন্ড লাগবে</p>
-        <a href="cards/victory-day.html" class="btn btn-main">এখনই কার্ড তৈরি করুন →</a>
+      <div class="slider-arrows">
+        <button class="arrow" id="prev" aria-label="আগের">‹</button>
+        <button class="arrow" id="next" aria-label="পরের">›</button>
       </div>
     </div>
+    <div class="slider-dots" id="dots"></div>
+  </section>
 
-    <footer>
-      <div class="footer-logo">🇧🇩 বাংলা ফটোকার্ড</div>
-      <p>গ্লাস মরফিজম ফটোকার্ড মেকার · <a href="https://github.com" target="_blank" rel="noopener">GitHub</a> এ ওপেন সোর্স</p>
-      <p style="margin-top:0.4rem;font-size:0.82rem">জয় বাংলা · মহান মুক্তিযুদ্ধের সকল শহীদদের প্রতি গভীর শ্রদ্ধা</p>
-    </footer>
-  </div>
+  <!-- CATEGORIES ONLY -->
+  <section class="categories" id="categories">
+    <h2 class="cat-title">📸 ক্যাটাগরি</h2>
+    <div class="cat-grid">
+      <a href="cards/victory-day.html" class="cat-card bg-1">
+        <span class="cat-new">নতুন</span>
+        <div class="cat-body">
+          <div class="cat-icon">🇧🇩</div>
+          <h3>বিজয় দিবস</h3>
+          <p>১৬ ডিসেম্বর · মহান বিজয়ের স্মরণে</p>
+          <span class="cat-badge badge-live">● এখনই</span>
+        </div>
+      </a>
+      <a href="#" class="cat-card bg-2" data-soon>
+        <div class="cat-body">
+          <div class="cat-icon">🟢</div>
+          <h3>স্বাধীনতা দিবস</h3>
+          <p>২৬ মার্চ · দেশপ্রেমের কার্ড</p>
+          <span class="cat-badge badge-soon">শীঘ্রই</span>
+        </div>
+      </a>
+      <a href="#" class="cat-card bg-3" data-soon>
+        <div class="cat-body">
+          <div class="cat-icon">🖤</div>
+          <h3>একুশে ফেব্রুয়ারি</h3>
+          <p>মাতৃভাষা দিবস · শ্রদ্ধা</p>
+          <span class="cat-badge badge-soon">শীঘ্রই</span>
+        </div>
+      </a>
+      <a href="#" class="cat-card bg-4" data-soon>
+        <div class="cat-body">
+          <div class="cat-icon">🌸</div>
+          <h3>পহেলা বৈশাখ</h3>
+          <p>বাংলা নববর্ষ · রঙিন শুভেচ্ছা</p>
+          <span class="cat-badge badge-soon">শীঘ্রই</span>
+        </div>
+      </a>
+      <a href="#" class="cat-card bg-5" data-soon>
+        <div class="cat-body">
+          <div class="cat-icon">🌙</div>
+          <h3>ঈদুল ফিতর</h3>
+          <p>ঈদের আনন্দ ভাগাভাগি</p>
+          <span class="cat-badge badge-soon">শীঘ্রই</span>
+        </div>
+      </a>
+      <a href="#" class="cat-card bg-6" data-soon>
+        <div class="cat-body">
+          <div class="cat-icon">🕋</div>
+          <h3>ঈদুল আজহা</h3>
+          <p>কুরবানির ঈদের শুভেচ্ছা</p>
+          <span class="cat-badge badge-soon">শীঘ্রই</span>
+        </div>
+      </a>
+      <a href="#" class="cat-card bg-7" data-soon>
+        <div class="cat-body">
+          <div class="cat-icon">🎂</div>
+          <h3>জন্মদিন</h3>
+          <p>বিশেষ কারো জন্মদিনে</p>
+          <span class="cat-badge badge-soon">শীঘ্রই</span>
+        </div>
+      </a>
+      <a href="#" class="cat-card bg-8" data-soon>
+        <div class="cat-body">
+          <div class="cat-icon">💍</div>
+          <h3>বিবাহ বার্ষিকী</h3>
+          <p>প্রেমের দিনটি স্মরণীয়</p>
+          <span class="cat-badge badge-soon">শীঘ্রই</span>
+        </div>
+      </a>
+      <a href="#" class="cat-card bg-9" data-soon>
+        <div class="cat-body">
+          <div class="cat-icon">🎓</div>
+          <h3>পরীক্ষার শুভেচ্ছা</h3>
+          <p>অনুপ্রেরণামূলক কার্ড</p>
+          <span class="cat-badge badge-soon">শীঘ্রই</span>
+        </div>
+      </a>
+    </div>
+  </section>
 
-  <div class="toast" id="toast">এই ক্যাটাগরি শীঘ্রই আসছে! 🇧🇩 এখন বিজয় দিবস কার্ড ব্যবহার করুন।</div>
+  <footer>🇧🇩 বাংলা ফটোকার্ড · জয় বাংলা</footer>
+
+  <div class="toast" id="toast">এই ক্যাটাগরি শীঘ্রই আসছে! এখন বিজয় দিবস কার্ড ব্যবহার করুন 🇧🇩</div>
 
   <script>
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
-    let particles = [], w, h;
-    function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-    resize();
-    window.addEventListener('resize', resize);
+    // ===== Slider =====
+    const slides = document.getElementById('slides');
+    const total = slides.children.length;
+    let current = 0;
+    let autoTimer;
 
-    class Particle {
-      constructor() { this.reset(true); }
-      reset(init) {
-        this.x = Math.random() * w;
-        this.y = init ? Math.random() * h : h + 10;
-        this.size = Math.random() * 2.5 + 0.5;
-        this.speedY = Math.random() * 0.4 + 0.1;
-        this.speedX = (Math.random() - 0.5) * 0.3;
-        this.opacity = Math.random() * 0.4 + 0.1;
-        const colors = ['255,215,0', '0,200,83', '255,23,68', '255,255,255'];
-        this.color = colors[Math.floor(Math.random() * colors.length)];
-      }
-      update() { this.y -= this.speedY; this.x += this.speedX; if (this.y < -10) this.reset(false); }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${this.color},${this.opacity})`;
-        ctx.fill();
-      }
+    const dotsWrap = document.getElementById('dots');
+    for (let i = 0; i < total; i++) {
+      const d = document.createElement('button');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', 'স্লাইড ' + (i + 1));
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
     }
-    for (let i = 0; i < 60; i++) particles.push(new Particle());
-    (function loop() {
-      ctx.clearRect(0, 0, w, h);
-      particles.forEach(p => { p.update(); p.draw(); });
-      requestAnimationFrame(loop);
-    })();
+    const dots = dotsWrap.querySelectorAll('.dot');
 
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
-
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      navLinks.classList.toggle('open');
-    });
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      hamburger.classList.remove('active');
-      navLinks.classList.remove('open');
-    }));
-
-    function animateCounters() {
-      document.querySelectorAll('[data-count]').forEach(el => {
-        const target = +el.dataset.count;
-        const start = performance.now();
-        function tick(now) {
-          const progress = Math.min((now - start) / 1500, 1);
-          const ease = 1 - Math.pow(1 - progress, 3);
-          if (target === 100) el.textContent = Math.floor(ease * target) + '%';
-          else el.textContent = Math.floor(ease * target);
-          if (progress < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-      });
+    function goTo(i) {
+      current = (i + total) % total;
+      slides.style.transform = `translateX(-${current * 100}%)`;
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
+      resetAuto();
     }
-    setTimeout(animateCounters, 600);
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          if (entry.target.classList.contains('feat') || entry.target.classList.contains('step')) {
-            const siblings = [...entry.target.parentElement.children];
-            entry.target.style.transitionDelay = (siblings.indexOf(entry.target) * 0.12) + 's';
-          }
-        }
-      });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.feat, .step').forEach(el => observer.observe(el));
+    document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('next').addEventListener('click', () => goTo(current + 1));
 
+    function resetAuto() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => goTo(current + 1), 4500);
+    }
+    resetAuto();
+
+    // Pause on hover
+    document.getElementById('slider').addEventListener('mouseenter', () => clearInterval(autoTimer));
+    document.getElementById('slider').addEventListener('mouseleave', resetAuto);
+
+    // Touch swipe
+    let touchX = 0;
+    slides.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+    slides.addEventListener('touchend', e => {
+      const diff = touchX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) goTo(current + (diff > 0 ? 1 : -1));
+    }, { passive: true });
+
+    // ===== Coming soon toast =====
     const toast = document.getElementById('toast');
-    let toastTimer;
+    let tTimer;
     document.querySelectorAll('[data-soon]').forEach(el => {
       el.addEventListener('click', e => {
         e.preventDefault();
         toast.classList.add('show');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+        clearTimeout(tTimer);
+        tTimer = setTimeout(() => toast.classList.remove('show'), 2800);
       });
     });
-
-    const heroCard = document.getElementById('heroCard');
-    if (window.matchMedia('(min-width: 901px)').matches) {
-      document.querySelector('.hero').addEventListener('mousemove', e => {
-        const rect = heroCard.getBoundingClientRect();
-        const dx = (e.clientX - (rect.left + rect.width / 2)) / 30;
-        const dy = (e.clientY - (rect.top + rect.height / 2)) / 30;
-        heroCard.style.transform = `rotate(${3 + dx * 0.3}deg) translate(${dx}px, ${dy}px)`;
-      });
-      document.querySelector('.hero').addEventListener('mouseleave', () => {
-        heroCard.style.transform = '';
-      });
-    }
   </script>
 </body>
 </html>
