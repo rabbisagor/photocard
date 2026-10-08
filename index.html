@@ -1,620 +1,290 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>বাংলা ফটোকার্ড</title>
-  <!-- Bangla Fonts -->
-  <link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #f4f6fb;
-      --surface: #ffffff;
-      --text: #1a1d26;
-      --muted: #6b7280;
-      --green: #006a4e;
-      --green-soft: #e6f5ef;
-      --red: #e11d48;
-      --red-soft: #fce7eb;
-      --gold: #b45309;
-      --gold-soft: #fef3c7;
-      --purple: #7c3aed;
-      --blue: #2563eb;
-      --border: rgba(0,0,0,0.06);
-      --shadow: 0 20px 50px rgba(0,0,0,0.08);
-      --radius: 24px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodePen Like Editor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #1e1e1e;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-    body {
-      font-family: 'SolaimanLipi', 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+        header {
+            background: #2d2d2d;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #444;
+        }
 
-    /* ===== NAV ===== */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 0.85rem 1.25rem;
-      background: rgba(244,246,251,0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .logo {
-      display: flex; align-items: center; gap: 0.5rem;
-      font-size: 1.15rem; font-weight: 700; color: var(--text);
-      text-decoration: none;
-    }
-    .logo-mark {
-      width: 34px; height: 34px; border-radius: 10px;
-      background: linear-gradient(135deg, var(--green), #00a86b);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; color: #fff;
-    }
-    .nav-cta {
-      background: var(--green); color: #fff;
-      padding: 0.5rem 1.15rem; border-radius: 12px;
-      font-size: 0.9rem; font-weight: 600; text-decoration: none;
-      font-family: inherit;
-      box-shadow: 0 4px 14px rgba(0,106,78,0.25);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,106,78,0.35); }
+        header h1 {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
 
-    /* ===== HERO SLIDER ===== */
-    .hero {
-      padding: 5.5rem 1.25rem 2.5rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+        .controls button {
+            background: #0e639c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            margin-left: 8px;
+        }
 
-    .slider {
-      position: relative;
-      border-radius: 28px;
-      overflow: hidden;
-      aspect-ratio: 16 / 9;
-      max-height: 420px;
-      box-shadow: var(--shadow);
-      background: #1a1a2e;
-    }
+        .controls button:hover {
+            background: #1177bb;
+        }
 
-    .slides {
-      display: flex;
-      height: 100%;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+        .main {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
 
-    .slide {
-      min-width: 100%;
-      height: 100%;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      overflow: hidden;
-    }
+        .editors {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #444;
+        }
 
-    /* Abstract 3D-like rings (CSS) */
-    .slide-rings {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .ring {
-      position: absolute;
-      border-radius: 50%;
-      border: 40px solid;
-      opacity: 0.35;
-      filter: blur(1px);
-    }
-    .ring-1 { width: 320px; height: 320px; border-color: rgba(168,85,247,0.5); top: -80px; right: -60px; transform: rotate(25deg); }
-    .ring-2 { width: 280px; height: 280px; border-color: rgba(59,130,246,0.4); bottom: -70px; left: -50px; transform: rotate(-20deg); }
-    .ring-3 { width: 200px; height: 200px; border-color: rgba(236,72,153,0.35); top: 40%; left: 55%; transform: rotate(40deg); }
+        .editor-tabs {
+            display: flex;
+            background: #252526;
+        }
 
-    /* Glass card inside slide */
-    .glass-banner {
-      position: relative;
-      z-index: 2;
-      width: min(420px, 90%);
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255,255,255,0.22);
-      border-radius: 22px;
-      padding: 2rem 1.75rem;
-      text-align: center;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-      animation: glassIn 0.7s ease;
-    }
-    @keyframes glassIn {
-      from { opacity: 0; transform: scale(0.95) translateY(12px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
-    }
+        .tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            background: #2d2d2d;
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+        }
 
-    .glass-banner .flag { font-size: 2rem; margin-bottom: 0.6rem; }
-    .glass-banner h2 {
-      font-family: 'SolaimanLipi', sans-serif;
-      font-size: clamp(1.6rem, 4vw, 2.2rem);
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.25;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.2);
-    }
-    .glass-banner .sub {
-      font-family: 'Hind Siliguri', sans-serif;
-      font-size: clamp(0.9rem, 2.2vw, 1.05rem);
-      color: rgba(255,255,255,0.85);
-      margin-bottom: 1.2rem;
-    }
-    .glass-banner .btn-slide {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: #fff;
-      color: var(--text);
-      padding: 0.65rem 1.4rem;
-      border-radius: 12px;
-      font-family: 'SolaimanLipi', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    }
-    .glass-banner .btn-slide:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-    }
+        .tab.active {
+            background: #1e1e1e;
+            border-bottom: 2px solid #0e639c;
+            color: #4fc1ff;
+        }
 
-    /* Slide color themes */
-    .slide-1 { background: linear-gradient(145deg, #1a0a2e 0%, #4a1a6b 40%, #1e3a5f 100%); }
-    .slide-2 { background: linear-gradient(145deg, #0a2f1f 0%, #006a4e 45%, #0d3b5c 100%); }
-    .slide-3 { background: linear-gradient(145deg, #1a1025 0%, #7c2d12 40%, #4c1d95 100%); }
-    .slide-4 { background: linear-gradient(145deg, #0c1445 0%, #1e3a8a 40%, #0e7490 100%); }
+        .editor-area {
+            flex: 1;
+            position: relative;
+        }
 
-    /* Slider controls */
-    .slider-dots {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1.1rem;
-    }
-    .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #c5c9d4;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s;
-      padding: 0;
-    }
-    .dot.active {
-      width: 24px;
-      border-radius: 4px;
-      background: var(--green);
-    }
+        textarea {
+            width: 100%;
+            height: 100%;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border: none;
+            padding: 15px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: none;
+            outline: none;
+        }
 
-    .slider-arrows {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      padding: 0 0.75rem;
-      pointer-events: none;
-      z-index: 5;
-    }
-    .arrow {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.9);
-      border: none;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem;
-      color: var(--text);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-      pointer-events: auto;
-      transition: transform 0.2s, background 0.2s;
-    }
-    .arrow:hover { transform: scale(1.08); background: #fff; }
+        .preview {
+            width: 50%;
+            background: white;
+            position: relative;
+        }
 
-    /* ===== CATEGORIES ===== */
-    .categories {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 1.5rem 1.25rem 4rem;
-    }
-    .cat-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+        .preview-header {
+            background: #f0f0f0;
+            color: #333;
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .cat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
+        iframe {
+            width: 100%;
+            height: calc(100% - 37px);
+            border: none;
+            background: white;
+        }
 
-    .cat-card {
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      min-height: 170px;
-      text-decoration: none;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      background-size: cover;
-      background-position: center;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-      transition: transform 0.3s, box-shadow 0.3s;
-      border: 1px solid rgba(255,255,255,0.5);
-    }
-    .cat-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 25%, rgba(0,0,0,0.7) 100%);
-      z-index: 1;
-      transition: background 0.3s;
-    }
-    .cat-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.14);
-    }
-    .cat-card:hover::before {
-      background: linear-gradient(180deg, transparent 15%, rgba(0,0,0,0.78) 100%);
-    }
-
-    .cat-body {
-      position: relative;
-      z-index: 2;
-      padding: 1.1rem 1rem;
-    }
-    .cat-icon { font-size: 1.6rem; margin-bottom: 0.2rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
-    .cat-body h3 {
-      font-family: 'SolaimanLipi', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 0.15rem;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
-    }
-    .cat-body p {
-      font-family: 'Hind Siliguri', sans-serif;
-      font-size: 0.78rem;
-      opacity: 0.9;
-      margin-bottom: 0.4rem;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .cat-badge {
-      display: inline-block;
-      font-size: 0.68rem;
-      font-weight: 600;
-      padding: 0.18rem 0.55rem;
-      border-radius: 8px;
-      font-family: 'Hind Siliguri', sans-serif;
-    }
-    .badge-live {
-      background: rgba(0,200,83,0.25);
-      color: #bbf7d0;
-      border: 1px solid rgba(0,200,83,0.35);
-    }
-    .badge-soon {
-      background: rgba(255,255,255,0.15);
-      color: #fde68a;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-    .cat-new {
-      position: absolute;
-      top: 10px; right: 10px;
-      z-index: 3;
-      background: var(--red);
-      color: #fff;
-      font-size: 0.65rem;
-      font-weight: 700;
-      padding: 0.2rem 0.55rem;
-      border-radius: 8px;
-      font-family: 'Hind Siliguri', sans-serif;
-    }
-
-    /* Soft colorful backgrounds */
-    .bg-1 { background-image: linear-gradient(160deg, rgba(0,80,50,0.45), rgba(0,30,20,0.55)), url('https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600&q=80'); background-color: #0a3d2e; }
-    .bg-2 { background-image: linear-gradient(160deg, rgba(0,100,70,0.4), rgba(0,40,30,0.55)), url('https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=600&q=80'); background-color: #006a4e; }
-    .bg-3 { background-image: linear-gradient(160deg, rgba(30,30,60,0.45), rgba(15,15,30,0.6)), url('https://images.unsplash.com/photo-1548013146-72479768bada?w=600&q=80'); background-color: #1a1a2e; }
-    .bg-4 { background-image: linear-gradient(160deg, rgba(232,93,4,0.4), rgba(120,40,0,0.5)), url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&q=80'); background-color: #e85d04; }
-    .bg-5 { background-image: linear-gradient(160deg, rgba(13,90,99,0.4), rgba(5,40,50,0.55)), url('https://images.unsplash.com/photo-1564769625905-50e93615e769?w=600&q=80'); background-color: #0d5c63; }
-    .bg-6 { background-image: linear-gradient(160deg, rgba(26,80,50,0.4), rgba(10,40,25,0.55)), url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=600&q=80'); background-color: #1a472a; }
-    .bg-7 { background-image: linear-gradient(160deg, rgba(180,40,50,0.4), rgba(80,15,25,0.55)), url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=80'); background-color: #9b2226; }
-    .bg-8 { background-image: linear-gradient(160deg, rgba(100,60,150,0.4), rgba(40,20,70,0.55)), url('https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80'); background-color: #6a4c93; }
-    .bg-9 { background-image: linear-gradient(160deg, rgba(30,50,90,0.4), rgba(15,25,50,0.55)), url('https://images.unsplash.com/photo-1456513080880-7d93ddd05f0a?w=600&q=80'); background-color: #1d3557; }
-
-    /* Toast */
-    .toast {
-      position: fixed; bottom: 1.5rem; left: 50%;
-      transform: translateX(-50%) translateY(120px);
-      background: #1a1d26; color: #fff;
-      padding: 0.85rem 1.4rem; border-radius: 14px;
-      font-size: 0.9rem; z-index: 200;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
-      white-space: nowrap;
-      font-family: 'Hind Siliguri', sans-serif;
-    }
-    .toast.show { transform: translateX(-50%) translateY(0); }
-
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      color: var(--muted);
-      font-size: 0.85rem;
-      border-top: 1px solid var(--border);
-      font-family: 'Hind Siliguri', sans-serif;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      .slider { aspect-ratio: 4/3; max-height: 360px; border-radius: 20px; }
-      .glass-banner { padding: 1.5rem 1.25rem; }
-      .ring { border-width: 28px; }
-      .ring-1 { width: 220px; height: 220px; }
-      .ring-2 { width: 180px; height: 180px; }
-      .arrow { width: 34px; height: 34px; font-size: 0.95rem; }
-    }
-    @media (max-width: 600px) {
-      .cat-grid { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
-      .cat-card { min-height: 140px; border-radius: 14px; }
-      .cat-body { padding: 0.75rem 0.5rem; }
-      .cat-body h3 { font-size: 0.82rem; }
-      .cat-body p { display: none; }
-      .cat-icon { font-size: 1.3rem; }
-      .cat-badge { font-size: 0.58rem; padding: 0.12rem 0.35rem; }
-      .cat-new { font-size: 0.55rem; top: 6px; right: 6px; }
-      .hero { padding-top: 4.8rem; }
-      .slider { aspect-ratio: 3/3.2; max-height: 340px; }
-    }
-  </style>
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .main {
+                flex-direction: column;
+            }
+            .editors, .preview {
+                width: 100%;
+                height: 50%;
+            }
+        }
+    </style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="#" class="logo"><div class="logo-mark">🇧🇩</div> বাংলা ফটোকার্ড</a>
-      <a href="cards/victory-day.html" class="nav-cta">কার্ড বানান</a>
+
+<header>
+    <h1>⚡ CodePen Like Editor</h1>
+    <div class="controls">
+        <button onclick="runCode()">▶ Run</button>
+        <button onclick="clearAll()">Clear All</button>
     </div>
-  </nav>
+</header>
 
-  <!-- HERO SLIDER -->
-  <section class="hero">
-    <div class="slider" id="slider">
-      <div class="slides" id="slides">
-        <!-- Slide 1: Victory Day -->
-        <div class="slide slide-1">
-          <div class="slide-rings">
-            <div class="ring ring-1"></div>
-            <div class="ring ring-2"></div>
-            <div class="ring ring-3"></div>
-          </div>
-          <div class="glass-banner">
-            <div class="flag">🇧🇩</div>
-            <h2>বিজয় দিবস ২০২৬</h2>
-            <p class="sub">মহান বিজয়ের ৫৫ বছর · জয় বাংলা</p>
-            <a href="cards/victory-day.html" class="btn-slide">কার্ড তৈরি করুন →</a>
-          </div>
+<div class="main">
+    <!-- Editors -->
+    <div class="editors">
+        <div class="editor-tabs">
+            <div class="tab active" onclick="switchTab('html')">HTML</div>
+            <div class="tab" onclick="switchTab('css')">CSS</div>
+            <div class="tab" onclick="switchTab('js')">JS</div>
         </div>
-        <!-- Slide 2: Independence -->
-        <div class="slide slide-2">
-          <div class="slide-rings">
-            <div class="ring ring-1" style="border-color:rgba(0,200,120,0.45)"></div>
-            <div class="ring ring-2" style="border-color:rgba(255,200,50,0.35)"></div>
-            <div class="ring ring-3" style="border-color:rgba(0,150,200,0.3)"></div>
-          </div>
-          <div class="glass-banner">
-            <div class="flag">🟢</div>
-            <h2>স্বাধীনতা দিবস</h2>
-            <p class="sub">২৬ মার্চ · স্বাধীনতার অমর স্মৃতি</p>
-            <a href="#categories" class="btn-slide">ক্যাটাগরি দেখুন →</a>
-          </div>
-        </div>
-        <!-- Slide 3: Ekushey -->
-        <div class="slide slide-3">
-          <div class="slide-rings">
-            <div class="ring ring-1" style="border-color:rgba(255,100,100,0.4)"></div>
-            <div class="ring ring-2" style="border-color:rgba(180,100,255,0.35)"></div>
-            <div class="ring ring-3" style="border-color:rgba(255,180,50,0.3)"></div>
-          </div>
-          <div class="glass-banner">
-            <div class="flag">🖤</div>
-            <h2>একুশে ফেব্রুয়ারি</h2>
-            <p class="sub">আন্তর্জাতিক মাতৃভাষা দিবস · শ্রদ্ধা</p>
-            <a href="#categories" class="btn-slide">ক্যাটাগরি দেখুন →</a>
-          </div>
-        </div>
-        <!-- Slide 4: General -->
-        <div class="slide slide-4">
-          <div class="slide-rings">
-            <div class="ring ring-1" style="border-color:rgba(100,180,255,0.45)"></div>
-            <div class="ring ring-2" style="border-color:rgba(100,255,200,0.3)"></div>
-            <div class="ring ring-3" style="border-color:rgba(200,150,255,0.35)"></div>
-          </div>
-          <div class="glass-banner">
-            <div class="flag">✨</div>
-            <h2>আপনার মুহূর্তকে<br>স্মরণীয় করুন</h2>
-            <p class="sub">গ্লাস মরফিজম ফটোকার্ড · ফ্রি</p>
-            <a href="cards/victory-day.html" class="btn-slide">এখনই শুরু করুন →</a>
-          </div>
-        </div>
-      </div>
 
-      <div class="slider-arrows">
-        <button class="arrow" id="prev" aria-label="আগের">‹</button>
-        <button class="arrow" id="next" aria-label="পরের">›</button>
-      </div>
+        <div class="editor-area">
+            <textarea id="htmlCode" placeholder="HTML লিখুন...">
+<div class="box">
+  <h1>Hello World!</h1>
+  <p>এটি CodePen-এর মতো লাইভ এডিটর</p>
+  <button onclick="changeColor()">রঙ পরিবর্তন করুন</button>
+</div>
+            </textarea>
+
+            <textarea id="cssCode" style="display:none;" placeholder="CSS লিখুন...">
+body {
+  font-family: system-ui, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.box {
+  text-align: center;
+  background: rgba(255,255,255,0.15);
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 50px;
+  background: #ff6b6b;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ee5a5a;
+}
+            </textarea>
+
+            <textarea id="jsCode" style="display:none;" placeholder="JavaScript লিখুন...">
+function changeColor() {
+  const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe'];
+  const random = colors[Math.floor(Math.random() * colors.length)];
+  document.body.style.background = random;
+}
+            </textarea>
+        </div>
     </div>
-    <div class="slider-dots" id="dots"></div>
-  </section>
 
-  <!-- CATEGORIES ONLY -->
-  <section class="categories" id="categories">
-    <h2 class="cat-title">📸 ক্যাটাগরি</h2>
-    <div class="cat-grid">
-      <a href="cards/victory-day.html" class="cat-card bg-1">
-        <span class="cat-new">নতুন</span>
-        <div class="cat-body">
-          <div class="cat-icon">🇧🇩</div>
-          <h3>বিজয় দিবস</h3>
-          <p>১৬ ডিসেম্বর · মহান বিজয়ের স্মরণে</p>
-          <span class="cat-badge badge-live">● এখনই</span>
+    <!-- Preview -->
+    <div class="preview">
+        <div class="preview-header">
+            <span>Preview</span>
+            <span style="font-size: 0.8rem; color: #666;">Live Output</span>
         </div>
-      </a>
-      <a href="#" class="cat-card bg-2" data-soon>
-        <div class="cat-body">
-          <div class="cat-icon">🟢</div>
-          <h3>স্বাধীনতা দিবস</h3>
-          <p>২৬ মার্চ · দেশপ্রেমের কার্ড</p>
-          <span class="cat-badge badge-soon">শীঘ্রই</span>
-        </div>
-      </a>
-      <a href="#" class="cat-card bg-3" data-soon>
-        <div class="cat-body">
-          <div class="cat-icon">🖤</div>
-          <h3>একুশে ফেব্রুয়ারি</h3>
-          <p>মাতৃভাষা দিবস · শ্রদ্ধা</p>
-          <span class="cat-badge badge-soon">শীঘ্রই</span>
-        </div>
-      </a>
-      <a href="#" class="cat-card bg-4" data-soon>
-        <div class="cat-body">
-          <div class="cat-icon">🌸</div>
-          <h3>পহেলা বৈশাখ</h3>
-          <p>বাংলা নববর্ষ · রঙিন শুভেচ্ছা</p>
-          <span class="cat-badge badge-soon">শীঘ্রই</span>
-        </div>
-      </a>
-      <a href="#" class="cat-card bg-5" data-soon>
-        <div class="cat-body">
-          <div class="cat-icon">🌙</div>
-          <h3>ঈদুল ফিতর</h3>
-          <p>ঈদের আনন্দ ভাগাভাগি</p>
-          <span class="cat-badge badge-soon">শীঘ্রই</span>
-        </div>
-      </a>
-      <a href="#" class="cat-card bg-6" data-soon>
-        <div class="cat-body">
-          <div class="cat-icon">🕋</div>
-          <h3>ঈদুল আজহা</h3>
-          <p>কুরবানির ঈদের শুভেচ্ছা</p>
-          <span class="cat-badge badge-soon">শীঘ্রই</span>
-        </div>
-      </a>
-      <a href="#" class="cat-card bg-7" data-soon>
-        <div class="cat-body">
-          <div class="cat-icon">🎂</div>
-          <h3>জন্মদিন</h3>
-          <p>বিশেষ কারো জন্মদিনে</p>
-          <span class="cat-badge badge-soon">শীঘ্রই</span>
-        </div>
-      </a>
-      <a href="#" class="cat-card bg-8" data-soon>
-        <div class="cat-body">
-          <div class="cat-icon">💍</div>
-          <h3>বিবাহ বার্ষিকী</h3>
-          <p>প্রেমের দিনটি স্মরণীয়</p>
-          <span class="cat-badge badge-soon">শীঘ্রই</span>
-        </div>
-      </a>
-      <a href="#" class="cat-card bg-9" data-soon>
-        <div class="cat-body">
-          <div class="cat-icon">🎓</div>
-          <h3>পরীক্ষার শুভেচ্ছা</h3>
-          <p>অনুপ্রেরণামূলক কার্ড</p>
-          <span class="cat-badge badge-soon">শীঘ্রই</span>
-        </div>
-      </a>
+        <iframe id="preview"></iframe>
     </div>
-  </section>
+</div>
 
-  <footer>🇧🇩 বাংলা ফটোকার্ড · জয় বাংলা</footer>
+<script>
+    // Tab switching
+    function switchTab(type) {
+        // Hide all textareas
+        document.getElementById('htmlCode').style.display = 'none';
+        document.getElementById('cssCode').style.display = 'none';
+        document.getElementById('jsCode').style.display = 'none';
 
-  <div class="toast" id="toast">এই ক্যাটাগরি শীঘ্রই আসছে! এখন বিজয় দিবস কার্ড ব্যবহার করুন 🇧🇩</div>
+        // Remove active class
+        document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
 
-  <script>
-    // ===== Slider =====
-    const slides = document.getElementById('slides');
-    const total = slides.children.length;
-    let current = 0;
-    let autoTimer;
-
-    const dotsWrap = document.getElementById('dots');
-    for (let i = 0; i < total; i++) {
-      const d = document.createElement('button');
-      d.className = 'dot' + (i === 0 ? ' active' : '');
-      d.setAttribute('aria-label', 'স্লাইড ' + (i + 1));
-      d.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(d);
-    }
-    const dots = dotsWrap.querySelectorAll('.dot');
-
-    function goTo(i) {
-      current = (i + total) % total;
-      slides.style.transform = `translateX(-${current * 100}%)`;
-      dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
-      resetAuto();
+        // Show selected
+        if (type === 'html') {
+            document.getElementById('htmlCode').style.display = 'block';
+            document.querySelectorAll('.tab')[0].classList.add('active');
+        } else if (type === 'css') {
+            document.getElementById('cssCode').style.display = 'block';
+            document.querySelectorAll('.tab')[1].classList.add('active');
+        } else {
+            document.getElementById('jsCode').style.display = 'block';
+            document.querySelectorAll('.tab')[2].classList.add('active');
+        }
     }
 
-    document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
-    document.getElementById('next').addEventListener('click', () => goTo(current + 1));
+    // Run the code
+    function runCode() {
+        const html = document.getElementById('htmlCode').value;
+        const css = document.getElementById('cssCode').value;
+        const js = document.getElementById('jsCode').value;
 
-    function resetAuto() {
-      clearInterval(autoTimer);
-      autoTimer = setInterval(() => goTo(current + 1), 4500);
+        const result = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>${css}</style>
+            </head>
+            <body>
+                ${html}
+                <script>${js}<\/script>
+            </body>
+            </html>
+        `;
+
+        const iframe = document.getElementById('preview');
+        iframe.srcdoc = result;
     }
-    resetAuto();
 
-    // Pause on hover
-    document.getElementById('slider').addEventListener('mouseenter', () => clearInterval(autoTimer));
-    document.getElementById('slider').addEventListener('mouseleave', resetAuto);
+    // Clear all
+    function clearAll() {
+        document.getElementById('htmlCode').value = '';
+        document.getElementById('cssCode').value = '';
+        document.getElementById('jsCode').value = '';
+        runCode();
+    }
 
-    // Touch swipe
-    let touchX = 0;
-    slides.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
-    slides.addEventListener('touchend', e => {
-      const diff = touchX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 40) goTo(current + (diff > 0 ? 1 : -1));
-    }, { passive: true });
+    // Auto run on load
+    window.onload = runCode;
 
-    // ===== Coming soon toast =====
-    const toast = document.getElementById('toast');
-    let tTimer;
-    document.querySelectorAll('[data-soon]').forEach(el => {
-      el.addEventListener('click', e => {
-        e.preventDefault();
-        toast.classList.add('show');
-        clearTimeout(tTimer);
-        tTimer = setTimeout(() => toast.classList.remove('show'), 2800);
-      });
-    });
-  </script>
+    // Optional: Auto-run while typing (uncomment if you want)
+    // document.getElementById('htmlCode').addEventListener('input', runCode);
+    // document.getElementById('cssCode').addEventListener('input', runCode);
+    // document.getElementById('jsCode').addEventListener('input', runCode);
+</script>
+
 </body>
 </html>
