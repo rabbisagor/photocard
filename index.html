@@ -764,7 +764,9 @@
       .hero {
         grid-template-columns: 1fr;
         text-align: center;
-        padding-top: 2.2rem;
+        padding-top: 2rem;
+        padding-bottom: 2.5rem;
+        gap: 2rem;
       }
 
       .hero p {
@@ -776,23 +778,45 @@
         justify-content: center;
       }
 
+      /* Keep visual on top, same design language as PC */
       .hero-visual {
         order: -1;
+        min-height: 340px;
+        padding: 1rem 0;
       }
 
       .mock-card {
-        width: 210px;
-        animation: none;
-        transform: rotate(0deg);
+        width: 230px;
+        /* Keep animation & slight rotation like PC */
+        transform: rotate(2deg);
+        animation: cardFloat 6s ease-in-out infinite;
       }
 
+      /* Show float badges on mobile too — repositioned */
       .float-1, .float-2, .float-3 {
-        display: none;
+        display: block;
+        font-size: 0.72rem;
+        padding: 0.4rem 0.7rem;
+      }
+
+      .float-1 {
+        top: 2%;
+        left: 2%;
+      }
+
+      .float-2 {
+        bottom: 4%;
+        right: 2%;
+      }
+
+      .float-3 {
+        top: 42%;
+        left: 0;
       }
 
       .hero-glow {
-        width: 260px;
-        height: 260px;
+        width: 280px;
+        height: 280px;
       }
 
       .nav-links {
@@ -855,6 +879,39 @@
     @media (max-width: 480px) {
       .hero h1 {
         font-size: 1.65rem;
+      }
+
+      .hero-visual {
+        min-height: 320px;
+      }
+
+      .mock-card {
+        width: 200px;
+      }
+
+      .float-1, .float-2, .float-3 {
+        font-size: 0.65rem;
+        padding: 0.35rem 0.55rem;
+      }
+
+      .float-1 {
+        top: 0;
+        left: 0;
+      }
+
+      .float-2 {
+        bottom: 2%;
+        right: 0;
+      }
+
+      .float-3 {
+        top: 40%;
+        left: -2%;
+      }
+
+      .hero-glow {
+        width: 240px;
+        height: 240px;
       }
 
       .btn {
@@ -960,7 +1017,7 @@
 
       <div class="cat-grid">
         <!-- Live -->
-        <a href="victory-day.html" class="cat-card featured cat-victory">
+        <a href="cards/victory-day.html" class="cat-card featured cat-victory">
           <div class="cat-icon">🇧🇩</div>
           <h3>বিজয় দিবস</h3>
           <p>১৬ ডিসেম্বর — সাভার স্মৃতিসৌধের ছায়ায় মহান বিজয়ের স্মরণে</p>
