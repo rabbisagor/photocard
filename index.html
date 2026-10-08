@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="বাংলাদেশের জাতীয় দিবস ও উৎসব উপলক্ষে আধুনিক গ্লাস-মরফিজম ফটোকার্ড তৈরি করুন। বিজয় দিবস, স্বাধীনতা দিবস, একুশে ফেব্রুয়ারি এবং আরও অনেক ক্যাটাগরি।" />
+  <title>বাংলা ফটোকার্ড | গ্লাস মরফিজম কার্ড মেকার</title>
+
+  <!-- SolaimanLipi Font -->
+  <link href="https://fonts.maateen.me/solaiman-lipi/font.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --green: #006a4e;
+      --green-dark: #004d38;
+      --red: #f42a41;
+      --gold: #d4af37;
+      --bg: #0b1a14;
+      --bg-soft: #0f2a20;
+      --glass: rgba(255, 255, 255, 0.07);
+      --glass-border: rgba(255, 255, 255, 0.14);
+      --text: #f0f4f2;
+      --text-muted: rgba(240, 244, 242, 0.7);
+      --radius: 18px;
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'SolaimanLipi', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Background ambience */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 10% 20%, rgba(244, 42, 65, 0.18) 0%, transparent 45%),
+        radial-gradient(ellipse at 90% 80%, rgba(0, 106, 78, 0.28) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ========== NAV ========== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(11, 26, 20, 0.75);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 0.85rem 1.25rem;
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .logo span {
+      font-size: 1.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      color: #fff !important;
+      padding: 0.45rem 1rem;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      color: #fff !important;
+      filter: brightness(1.1);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 1.25rem 3.5rem;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(244, 42, 65, 0.15);
+      border: 1px solid rgba(244, 42, 65, 0.35);
+      color: #ff8a95;
+      font-size: 0.85rem;
+      padding: 0.3rem 0.85rem;
+      border-radius: 30px;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.9rem, 4.5vw, 2.85rem);
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      background: linear-gradient(105deg, #fff 30%, var(--gold) 70%, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.08rem;
+      max-width: 480px;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.75rem 1.4rem;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(0, 106, 78, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      color: var(--text);
+    }
+
+    /* Hero visual card mock */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .mock-card {
+      width: 260px;
+      aspect-ratio: 3/4.1;
+      border-radius: 22px;
+      background: linear-gradient(160deg, #004d38 0%, #006a4e 40%, #0a3d2e 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: var(--shadow), 0 0 60px rgba(0, 106, 78, 0.25);
+      padding: 1.3rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transform: rotate(3deg);
+    }
+
+    .mock-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--green) 50%, var(--red) 50%);
+    }
+
+    .mock-badge {
+      background: rgba(244, 42, 65, 0.85);
+      font-size: 0.7rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 20px;
+      margin-bottom: 0.4rem;
+    }
+
+    .mock-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.15rem;
+    }
+
+    .mock-sub {
+      font-size: 0.8rem;
+      color: var(--gold);
+      margin-bottom: 0.9rem;
+    }
+
+    .mock-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--red), var(--green));
+      padding: 4px;
+      margin-bottom: 0.9rem;
+    }
+
+    .mock-photo-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+    }
+
+    .mock-glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 14px;
+      padding: 0.8rem;
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .mock-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .mock-msg {
+      font-size: 0.78rem;
+      opacity: 0.85;
+      line-height: 1.4;
+    }
+
+    .float-badge {
+      position: absolute;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 0.5rem 0.85rem;
+      font-size: 0.8rem;
+      box-shadow: var(--shadow);
+    }
+
+    .float-1 {
+      top: 8%;
+      left: -10%;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .float-2 {
+      bottom: 12%;
+      right: -8%;
+      animation: float 5s ease-in-out infinite 0.8s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* ========== SECTION COMMON ========== */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3.5rem 1.25rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ========== CATEGORIES ========== */
+    .categories {
+      background: linear-gradient(180deg, transparent, rgba(0, 106, 78, 0.06), transparent);
+    }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .cat-card {
+      background: var(--glass);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.25rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cat-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .cat-card.featured {
+      border-color: rgba(244, 42, 65, 0.4);
+      background: linear-gradient(145deg, rgba(244, 42, 65, 0.12), rgba(0, 106, 78, 0.12));
+    }
+
+    .cat-card.featured::after {
+      content: 'নতুন';
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--red);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .cat-icon {
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
+    .cat-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .cat-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      flex: 1;
+    }
+
+    .cat-status {
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .cat-status.live {
+      color: #4ade80;
+    }
+
+    .cat-status.soon {
+      color: var(--gold);
+    }
+
+    /* ========== FEATURES ========== */
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .feat-item {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      text-align: center;
+    }
+
+    .feat-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(0, 106, 78, 0.35), rgba(212, 175, 55, 0.2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 0.9rem;
+    }
+
+    .feat-item h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .feat-item p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* ========== HOW IT WORKS ========== */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      counter-reset: step;
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+    }
+
+    .step-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0 auto 0.9rem;
+      box-shadow: 0 4px 15px rgba(0, 106, 78, 0.4);
+    }
+
+    .step h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .step p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* ========== CTA BANNER ========== */
+    .cta-banner {
+      max-width: 1100px;
+      margin: 1rem auto 3rem;
+      padding: 0 1.25rem;
+    }
+
+    .cta-inner {
+      background: linear-gradient(135deg, rgba(0, 106, 78, 0.35), rgba(244, 42, 65, 0.2));
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      backdrop-filter: blur(12px);
+    }
+
+    .cta-inner h2 {
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      margin-bottom: 0.6rem;
+    }
+
+    .cta-inner p {
+      color: var(--text-muted);
+      margin-bottom: 1.4rem;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      border-top: 1px solid var(--glass-border);
+      padding: 2rem 1.25rem;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 2.5rem;
+      }
+
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-btns {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .mock-card {
+        width: 220px;
+        transform: rotate(0deg);
+      }
+
+      .float-1, .float-2 {
+        display: none;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(11, 26, 20, 0.97);
+        flex-direction: column;
+        padding: 1rem 1.25rem 1.25rem;
+        gap: 0.85rem;
+        border-bottom: 1px solid var(--glass-border);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .cat-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- NAV -->
+    <nav>
+      <div class="nav-inner">
+        <a href="#" class="logo">
+          <span>🇧🇩</span> বাংলা ফটোকার্ড
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="মেনু">☰</button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#categories">ক্যাটাগরি</a></li>
+          <li><a href="#features">ফিচার</a></li>
+          <li><a href="#howto">কীভাবে</a></li>
+          <li><a href="cards/victory-day.html" class="nav-cta">কার্ড বানান →</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <div class="hero-badge">✨ গ্লাস মরফিজম · ২০২৬</div>
+        <h1>আধুনিক বাংলা<br />ফটোকার্ড মেকার</h1>
+        <p>
+          বিজয় দিবস, স্বাধীনতা দিবস, একুশে ফেব্রুয়ারিসহ জাতীয় ও সামাজিক উৎসবের জন্য সুন্দর গ্লাস-মরফিজম ফটোকার্ড তৈরি করুন — ছবি, নাম ও টেক্সট কাস্টমাইজ করে PNG, JPG বা PDF ডাউনলোড করুন।
+        </p>
+        <div class="hero-btns">
+          <a href="cards/victory-day.html" class="btn btn-primary">🇧🇩 বিজয় দিবস কার্ড বানান</a>
+          <a href="#categories" class="btn btn-secondary">সব ক্যাটাগরি দেখুন</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="float-badge float-1">📥 PNG · JPG · PDF</div>
+        <div class="mock-card">
+          <div class="mock-badge">১৬ ডিসেম্বর</div>
+          <div class="mock-title">বিজয় দিবস ২০২৬</div>
+          <div class="mock-sub">মহান বিজয়ের ৫৫ বছর</div>
+          <div class="mock-photo">
+            <div class="mock-photo-inner">🇧🇩</div>
+          </div>
+          <div class="mock-glass">
+            <div class="mock-name">আপনার নাম</div>
+            <div class="mock-msg">জয় বাংলা! মহান মুক্তিযুদ্ধের চেতনায়...</div>
+          </div>
+        </div>
+        <div class="float-badge float-2">✏️ পুরোপুরি কাস্টমাইজ</div>
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="categories" id="categories">
+      <div class="section-header">
+        <h2>📸 ফটোকার্ড ক্যাটাগরি</h2>
+        <p>আপনার পছন্দের উপলক্ষ বেছে নিন এবং কয়েক সেকেন্ডে সুন্দর কার্ড তৈরি করুন</p>
+      </div>
+
+      <div class="cat-grid">
+        <!-- Live -->
+        <a href="cards/victory-day.html" class="cat-card featured">
+          <div class="cat-icon">🇧🇩</div>
+          <h3>বিজয় দিবস</h3>
+          <p>১৬ ডিসেম্বর — মহান বিজয়ের স্মরণে আধুনিক গ্লাস-মরফিজম কার্ড</p>
+          <div class="cat-status live">● এখনই ব্যবহার করুন</div>
+        </a>
+
+        <a href="#" class="cat-card" onclick="return soon(event)">
+          <div class="cat-icon">🟢</div>
+          <h3>স্বাধীনতা দিবস</h3>
+          <p>২৬ মার্চ — স্বাধীনতার অমর স্মৃতি নিয়ে দেশপ্রেমের কার্ড</p>
+          <div class="cat-status soon">⏳ শীঘ্রই আসছে</div>
+        </a>
+
+        <a href="#" class="cat-card" onclick="return soon(event)">
+          <div class="cat-icon">🖤</div>
+          <h3>একুশে ফেব্রুয়ারি</h3>
+          <p>আন্তর্জাতিক মাতৃভাষা দিবস — ভাষা শহীদদের প্রতি শ্রদ্ধা</p>
+          <div class="cat-status soon">⏳ শীঘ্রই আসছে</div>
+        </a>
+
+        <a href="#" class="cat-card" onclick="return soon(event)">
+          <div class="cat-icon">🌸</div>
+          <h3>পহেলা বৈশাখ</h3>
+          <p>বাংলা নববর্ষ — রঙিন ও ঐতিহ্যবাহী শুভেচ্ছা কার্ড</p>
+          <div class="cat-status soon">⏳ শীঘ্রই আসছে</div>
+        </a>
+
+        <a href="#" class="cat-card" onclick="return soon(event)">
+          <div class="cat-icon">🌙</div>
+          <h3>ঈদুল ফিতর</h3>
+          <p>ঈদের আনন্দ ভাগাভাগি করে নিন সুন্দর গ্লাস কার্ডে</p>
+          <div class="cat-status soon">⏳ শীঘ্রই আসছে</div>
+        </a>
+
+        <a href="#" class="cat-card" onclick="return soon(event)">
+          <div class="cat-icon">🕋</div>
+          <h3>ঈদুল আজহা</h3>
+          <p>কুরবানির ঈদের শুভেচ্ছা — পরিবার ও বন্ধুদের জন্য</p>
+          <div class="cat-status soon">⏳ শীঘ্রই আসছে</div>
+        </a>
+
+        <a href="#" class="cat-card" onclick="return soon(event)">
+          <div class="cat-icon">🎂</div>
+          <h3>জন্মদিন</h3>
+          <p>বিশেষ কারো জন্মদিনে ব্যক্তিগতকৃত সুন্দর শুভেচ্ছা কার্ড</p>
+          <div class="cat-status soon">⏳ শীঘ্রই আসছে</div>
+        </a>
+
+        <a href="#" class="cat-card" onclick="return soon(event)">
+          <div class="cat-icon">💍</div>
+          <h3>বিবাহ বার্ষিকী</h3>
+          <p>প্রেম ও প্রতিশ্রুতির দিনটি স্মরণীয় করে তুলুন</p>
+          <div class="cat-status soon">⏳ শীঘ্রই আসছে</div>
+        </a>
+
+        <a href="#" class="cat-card" onclick="return soon(event)">
+          <div class="cat-icon">🎓</div>
+          <h3>পরীক্ষার শুভেচ্ছা</h3>
+          <p>পরীক্ষার্থীদের জন্য অনুপ্রেরণামূলক শুভেচ্ছা কার্ড</p>
+          <div class="cat-status soon">⏳ শীঘ্রই আসছে</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+      <div class="section-header">
+        <h2>✨ কেন ব্যবহার করবেন?</h2>
+        <p>সহজ, সুন্দর এবং সম্পূর্ণ ফ্রি</p>
+      </div>
+
+      <div class="feat-grid">
+        <div class="feat-item">
+          <div class="feat-icon">🖼️</div>
+          <h3>ছবি আপলোড</h3>
+          <p>নিজের ছবি দিয়ে কার্ডকে একদম ব্যক্তিগতকৃত করুন</p>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">✏️</div>
+          <h3>পুরোপুরি কাস্টমাইজ</h3>
+          <p>নাম, বার্তা, শিরোনাম — সব কিছু আপনার মতো করে লিখুন</p>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">💎</div>
+          <h3>গ্লাস মরফিজম</h3>
+          <p>আধুনিক frosted-glass ডিজাইন যা সবার নজর কাড়ে</p>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">📥</div>
+          <h3>PNG · JPG · PDF</h3>
+          <p>হাই-রেজোলিউশনে তিনটি ফরম্যাটে ডাউনলোড করুন</p>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">📱</div>
+          <h3>মোবাইল ফ্রেন্ডলি</h3>
+          <p>ফোন, ট্যাবলেট বা কম্পিউটার — সব ডিভাইসে পারফেক্ট</p>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon">🔒</div>
+          <h3>কোনো সাইনআপ নেই</h3>
+          <p>সরাসরি ব্যবহার করুন — কোনো অ্যাকাউন্ট লাগবে না</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW TO -->
+    <section id="howto">
+      <div class="section-header">
+        <h2>🛠️ কীভাবে কাজ করে?</h2>
+        <p>মাত্র তিনটি ধাপে আপনার কার্ড রেডি</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">১</div>
+          <h3>ক্যাটাগরি বেছে নিন</h3>
+          <p>বিজয় দিবস বা আপনার পছন্দের উপলক্ষ সিলেক্ট করুন</p>
+        </div>
+        <div class="step">
+          <div class="step-num">২</div>
+          <h3>কাস্টমাইজ করুন</h3>
+          <p>ছবি আপলোড করুন, নাম ও শুভেচ্ছা বার্তা লিখুন</p>
+        </div>
+        <div class="step">
+          <div class="step-num">৩</div>
+          <h3>ডাউনলোড করুন</h3>
+          <p>PNG, JPG বা PDF ফরম্যাটে কার্ড সেভ করুন</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-banner">
+      <div class="cta-inner">
+        <h2>🇧🇩 বিজয় দিবস ২০২৬ উপলক্ষে কার্ড বানান</h2>
+        <p>এখনই শুরু করুন — মাত্র কয়েক সেকেন্ড লাগবে</p>
+        <a href="cards/victory-day.html" class="btn btn-primary">এখনই কার্ড তৈরি করুন →</a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-logo">🇧🇩 বাংলা ফটোকার্ড</div>
+        <p>
+          গ্লাস মরফিজম ফটোকার্ড মেকার · 
+          <a href="https://github.com" target="_blank" rel="noopener">GitHub</a> এ ওপেন সোর্স
+        </p>
+        <p style="margin-top: 0.4rem; font-size: 0.8rem;">
+          জয় বাংলা · মহান মুক্তিযুদ্ধের সকল শহীদদের প্রতি গভীর শ্রদ্ধা
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Mobile menu
+    const toggle = document.getElementById('menuToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('open');
+    });
+
+    // Close menu on link click
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => links.classList.remove('open'));
+    });
+
+    // Coming soon alert
+    function soon(e) {
+      e.preventDefault();
+      alert('এই ক্যাটাগরি শীঘ্রই আসছে! এখন বিজয় দিবস কার্ড ব্যবহার করতে পারেন। 🇧🇩');
+      return false;
+    }
+  </script>
+</body>
+  </html>
